@@ -7,10 +7,18 @@
 //
 
 #include <iostream>
+//#include <inet>
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+
+    char *input = nullptr;
+    input = new char[2];
+
+    std::cout << "Your input:";
+    std::cin  >> input;
+    std::cout << "Your input was: " << input << "\n";
+    
+    delete input;
     return 0;
 }
