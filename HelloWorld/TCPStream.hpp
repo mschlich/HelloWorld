@@ -19,7 +19,7 @@ private:
     unsigned int port;
     
 public:
-    TCPStream();
+    TCPStream() throw ();
     TCPStream(int Address);
     TCPStream(const TCPStream &toCopy);
     TCPStream &operator=(const TCPStream &toCopy);
