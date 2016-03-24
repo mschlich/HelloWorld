@@ -6,8 +6,13 @@
 //  Copyright © 2016 marcus@xerbot.org. All rights reserved.
 //
 
-#include "ErrorHandling.hpp"
+#include "Exceptions.hpp"
 
+using namespace org_xerobot;
+
+// ********************************************************************************
+// Begin of class BaseException ***************************************************
+// ********************************************************************************
 const int BaseException::__initNumber = -1000;
 
 BaseException::BaseException() : _errorNumber (BaseException::__initNumber),
@@ -55,9 +60,25 @@ std::string BaseException::getErrorMessageAsString() const {
 }
 
 std::string BaseException::toString() const {
-    std::string helper("ErrorMessage: ");
+    std::string helper("ErrorMessage: " + _errorMessagge);
     helper += " (";
-    helper += _errorNumber;
+    helper +=  std::to_string(_errorNumber);
     helper += ")";
     return helper;
 }
+
+// *******************************************************************************
+// Begin of class NetException ***************************************************
+// *******************************************************************************
+const std::string NetException::__msgPrefix("NET_EXCEPTION - ");
+
+NetException::NetException(int errorNumber, std::string errorMessage) :
+    BaseException(errorNumber, errorMessage) {}
+
+NetException::NetException(int errorNumber, const char *errorMessage) :
+    BaseException(errorNumber, errorMessage){}
+
+std::string NetException::toString() const {
+    return __msgPrefix + BaseException::toString();
+}
+

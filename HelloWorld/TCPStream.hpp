@@ -9,21 +9,49 @@
 #ifndef TCPStream_hpp
 #define TCPStream_hpp
 
-#include <stdio.h>
+#include <string>
 
-class TCPStream {
+#include "Exceptions.hpp"
+
+namespace org_xerobot {
     
-private:
-    int socket;
-    unsigned int ipAdress;
-    unsigned int port;
-    
-public:
-    TCPStream() throw ();
-    TCPStream(int Address);
-    TCPStream(const TCPStream &toCopy);
-    TCPStream &operator=(const TCPStream &toCopy);
-    ~TCPStream();
+    struct s_socket;
+
+    class TCPStream {
+        
+    private:
+        std::string _ipAdress;
+        unsigned int _port;
+        s_socket *_sockImpl;
+        
+    public:
+        TCPStream();
+        TCPStream(std::string address);
+        TCPStream(std::string address, unsigned int port);
+        TCPStream(const TCPStream &toCopy);
+        
+        TCPStream &operator=(const TCPStream &toCopy);
+        
+        // Returns true if the same socket (Family, Address, Port) is used.
+        bool operator==(const TCPStream &toCompare) const;
+        
+        // Returns true if differen sockets are used.
+        bool operator!=(const TCPStream &toCompare) const;
+        
+        // Receive something from ne twork
+        const TCPStream &operator>>(std::string &toReceive) const throw (const NetException);
+        
+        // Send something into the network
+        TCPStream &operator<<(const std::string &toSend) throw (const NetException);
+        
+        // Open the stream.
+        void open() throw (const NetException);
+        
+        // Close the stream.
+        void close() throw (const NetException);
+        
+        ~TCPStream();
+    };
     
 };
 

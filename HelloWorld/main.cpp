@@ -7,19 +7,53 @@
 //
 
 #include <iostream>
-//#include <inet>
+#include "TCPStream.hpp"
 
-
+using namespace std;
 
 int main(int argc, const char * argv[]) {
+    string googleIP("216.58.213.35");
+    string spiegelIP("62.138.116.3");
+    string loopBackIP("127.0.0.1");
+    int httpPort = 80;
 
-    char *input = nullptr;
-    input = new char[2];
-
-    std::cout << "Your input:";
-    std::cin  >> input;
-    std::cout << "Your input was: " << input << "\n";
+    org_xerobot::TCPStream stream(spiegelIP, httpPort);
+    try {
+        stream.open();
+    } catch (org_xerobot::NetException &e) {
+        cout << "Unable to establish connection." << endl;
+        cout << e.toString() << endl;
+        return -1;
+    }
+    cout << "Stream opnened successfully" << endl;
     
-    delete input;
+    try {
+        stream << "HEAD http://www.spiegel.de HTTP/1.0\n" << "HOST:www.spiegel.de\n" <<  "\n\n";
+    } catch (org_xerobot::NetException e) {
+        cout << "Unable to sent data " << endl;
+        cout << e.toString() << endl;
+        return -1;
+    }
+
+    string reply;
+    try {
+         stream >> reply;
+    } catch (org_xerobot::NetException e) {
+        cout << "Unable to receive data " << endl;
+        cout << e.toString() << endl;
+        return -1;
+    }
+    cout << "Reply was: " << endl;
+    cout << reply << endl;
+    
+    try {
+        stream.close();
+    } catch (org_xerobot::NetException e) {
+        cout << "Error closing network stream." << endl;
+        cout << e.toString() << endl;
+        return -1;
+    }
+    cout << "Stream closed successfully" << endl;
+    
     return 0;
 }
