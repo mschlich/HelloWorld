@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0166B61C87952C00A00C4D /* TCPStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0166B41C87952C00A00C4D /* TCPStream.cpp */; };
 		2C0CEC7D1C7A6774005E1030 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CEC7C1C7A6774005E1030 /* main.cpp */; };
+		2C94243A1CA2BA8E007B7F69 /* Exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9424381CA2BA8E007B7F69 /* Exceptions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C0166B41C87952C00A00C4D /* TCPStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPStream.cpp; sourceTree = "<group>"; };
+		2C0166B51C87952C00A00C4D /* TCPStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TCPStream.hpp; sourceTree = "<group>"; };
 		2C0CEC791C7A6774005E1030 /* HelloWorld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloWorld; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0CEC7C1C7A6774005E1030 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2C9424381CA2BA8E007B7F69 /* Exceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Exceptions.cpp; sourceTree = "<group>"; };
+		2C9424391CA2BA8E007B7F69 /* Exceptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exceptions.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				2C0CEC7C1C7A6774005E1030 /* main.cpp */,
+				2C0166B41C87952C00A00C4D /* TCPStream.cpp */,
+				2C0166B51C87952C00A00C4D /* TCPStream.hpp */,
+				2C9424381CA2BA8E007B7F69 /* Exceptions.cpp */,
+				2C9424391CA2BA8E007B7F69 /* Exceptions.hpp */,
 			);
 			path = HelloWorld;
 			sourceTree = "<group>";
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C94243A1CA2BA8E007B7F69 /* Exceptions.cpp in Sources */,
 				2C0CEC7D1C7A6774005E1030 /* main.cpp in Sources */,
+				2C0166B61C87952C00A00C4D /* TCPStream.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +249,7 @@
 				2C0CEC821C7A6774005E1030 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
