@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
     cout << "Stream opnened successfully" << endl;
     
     try {
-        stream << "HEAD http://www.spiegel.de HTTP/1.0\n" << "HOST:www.spiegel.de\n" <<  "\n\n";
+        stream << "GET http://www.spiegel.de HTTP/1.0\n" << "HOST:www.spiegel.de\n" <<  "\n\n";
     } catch (org_xerobot::NetException e) {
         cout << "Unable to sent data " << endl;
         cout << e.toString() << endl;

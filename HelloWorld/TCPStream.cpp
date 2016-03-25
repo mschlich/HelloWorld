@@ -9,11 +9,16 @@
 #include "TCPStream.hpp"
 
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <errno.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <iostream>
-#include <stdio.h>
+#include <string>
+#include <netdb.h>
+
+//#include <iostream>
+
+
 
 using namespace org_xerobot;
 
@@ -59,6 +64,24 @@ TCPStream &TCPStream::operator=(const TCPStream &toCopy) {
 
 void TCPStream::open() throw (const NetException) {
     
+    
+    struct addrinfo *servInfo = nullptr;
+    struct addrinfo hints;
+    memset(&hints, 0, sizeof(hints));
+
+    
+    hints.ai_family = AF_UNSPEC; // Address family: Unspecific
+    hints.ai_socktype = SOCK_STREAM; // Stream Socket (i.e. TCP)
+    hints.ai_flags = AI_PASSIVE; // Use local IP Address
+    std::string port = std::to_string(_port);
+    
+    int status = ::getaddrinfo(_ipAdress.c_str(), port.c_str(), &hints, &servInfo);
+    if (status) {
+        throw (NetException(status, gai_strerror(status)));
+    }
+
+    
+    
     // Open socket and throw exception in case of error
     _sockImpl->_socket = socket(PF_INET, SOCK_STREAM, 0);
     if (_sockImpl->_socket < 0) {
@@ -74,8 +97,10 @@ void TCPStream::open() throw (const NetException) {
         throw (NetException(errno, strerror(errno)));
     }*/
     
-    // Connect to server
-    struct sockaddr_in name;
+    
+    
+    
+    sockaddr_in name;
     name.sin_family = PF_INET;
     name.sin_port = htons(_port);
     
@@ -115,6 +140,8 @@ const TCPStream & TCPStream::operator>>(std::string &toReceive) const throw (con
         toReceive += buffer;
         memset(buffer, 0, buffSize);
     }
+    
+    delete[] buffer;
  
     return *this;
 }
