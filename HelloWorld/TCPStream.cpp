@@ -10,11 +10,14 @@
 
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <errno.h>
+
+#include <cerrno>
+#include <string>
+
+#include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <string>
-#include <netdb.h>
+
 
 //#include <iostream>
 
