@@ -12,12 +12,14 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    
     string googleIP("216.58.213.35");
     string spiegelIP("62.138.116.3");
+    //string spiegelIP("62.138.116.3333");
     string loopBackIP("127.0.0.1");
     int httpPort = 80;
 
-    org_xerobot::TCPStream stream(spiegelIP, httpPort);
+    org_xerobot::TCPClientStream stream(spiegelIP, httpPort);
     try {
         stream.open();
     } catch (org_xerobot::NetException &e) {
